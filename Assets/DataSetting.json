@@ -1,0 +1,66 @@
+{
+    "persons": [
+        {
+            "name": "A",
+            "isActive": true
+        },
+        {
+            "name": "B",
+            "isActive": true
+        },
+        {
+            "name": "C",
+            "isActive": true
+        },
+        {
+            "name": "D",
+            "isActive": true
+        },
+        {
+            "name": "E",
+            "isActive": true
+        },
+        {
+            "name": "F",
+            "isActive": true
+        },
+        {
+            "name": "G",
+            "isActive": true
+        },
+        {
+            "name": "H",
+            "isActive": true
+        },
+        {
+            "name": "I",
+            "isActive": true
+        },
+        {
+            "name": "J",
+            "isActive": true
+        }
+    ],
+    "jobs": [
+        {
+            "name": "가",
+            "count": 2
+        },
+        {
+            "name": "나",
+            "count": 2
+        },
+        {
+            "name": "다",
+            "count": 2
+        },
+        {
+            "name": "라",
+            "count": 2
+        },
+        {
+            "name": "마",
+            "count": 2
+        }
+    ]
+}
