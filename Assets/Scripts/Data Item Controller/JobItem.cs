@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class JobItem : DataItem<Job>
 {
     [SerializeField]
-    private TextMeshProUGUI nameText;
+    private TMP_InputField nameText;
     [SerializeField]
     private TMP_InputField countField;
     [SerializeField]
@@ -17,32 +17,38 @@ public class JobItem : DataItem<Job>
     [SerializeField]
     private Button decreaseButton;
 
-    private void OnEnable()
-    {
-        increaseButton.onClick.AddListener(() => Increase());
-        decreaseButton.onClick.AddListener(() => Decrease());
-    }
-
     public override void Initialize()
     {
-        nameText.text = data.name;
-        countField.text = data.count.ToString();
+        nameText.text = Data.name;
+        countField.text = Data.count.ToString();
     }
 
-    private void Increase()
+    public void Increase()
     {
-        data.count++;
-        countField.text = data.count.ToString();
+        Data.count++;
+        countField.text = Data.count.ToString();
         CleaningDatas.Instance.Save();
     }
 
-    private void Decrease()
+    public void Decrease()
     {
-        if(data.count > 0)
+        if(Data.count > 0)
         {
-            data.count--;
-            countField.text = data.count.ToString();
+            Data.count--;
+            countField.text = Data.count.ToString();
             CleaningDatas.Instance.Save();
         }
+    }
+
+    public void ChangeCount(string count)
+    {
+        Data.count = int.Parse(count);
+        CleaningDatas.Instance.Save();
+    }
+
+    public void ChangeName(string name)
+    {
+        Data.name = name;
+        CleaningDatas.Instance.Save();
     }
 }

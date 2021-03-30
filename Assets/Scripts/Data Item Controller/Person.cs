@@ -9,6 +9,12 @@ public class Person : Data
     public string name;
     public bool isActive;
 
+    public Person()
+    {
+        name = "¿Ã∏ß";
+        isActive = true;
+    }
+
     public Person(string name, bool isActive)
     {
         this.name = name ?? throw new ArgumentNullException(nameof(name));

@@ -6,8 +6,8 @@ using System;
 
 public class CleaningDataWindow : ScriptableWizard
 {
-    public Person[] persons;
-    public Job[] jobs;
+    public List<Person> personList;
+    public List<Job> jobList;
 
     [MenuItem("Window/Cleaning Data")]
     private static void Open()
@@ -19,14 +19,14 @@ public class CleaningDataWindow : ScriptableWizard
     private void OnEnable()
     {
         Debug.Log("Cleaning Data Window Enable");
-        jobs = CleaningDatas.Instance.jobs;
-        persons = CleaningDatas.Instance.persons;
+        jobList = CleaningDatas.Instance.JobList;
+        personList = CleaningDatas.Instance.PersonList;
     }
 
     private void OnWizardCreate()
     {
-        CleaningDatas.Instance.jobs = jobs;
-        CleaningDatas.Instance.persons = persons;
+        CleaningDatas.Instance.JobList = jobList;
+        CleaningDatas.Instance.PersonList = personList;
         CleaningDatas.Instance.Save();
     }
 

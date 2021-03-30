@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,8 +10,10 @@ public class CleaningDatas
     
     private static CleaningDatas instance;
 
-    public Person[] persons;
-    public Job[] jobs;
+    [SerializeField]
+    private List<Person> personList;
+    [SerializeField]
+    private List<Job> jobList;
 
     public static string SettingFilePath => Path.Combine(Application.dataPath, settingFileName);
     public static CleaningDatas Instance
@@ -37,13 +37,20 @@ public class CleaningDatas
             return instance;
         }
     }
-    public int JobCountSum => Array.ConvertAll(jobs, o => o.count).Sum();
-    public Person[] ActivePersons => Array.FindAll(persons, o => o.isActive);
+    public int JobCountSum => JobList.ConvertAll(o => o.count).Sum();
+    public List<Person> ActivePersons => PersonList.FindAll(o => o.isActive);
+
+    public List<Person> PersonList { get => personList; set => personList = value; }
+    public List<Job> JobList { get => jobList; set => jobList = value; }
+
+    public CleaningDatas()
+    {
+        personList = new List<Person>();
+        jobList = new List<Job>();
+    }
 
     public void Save()
     {
         File.WriteAllText(SettingFilePath, JsonUtility.ToJson(instance, true));
     }
-
-   
 }

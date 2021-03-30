@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class JobController : DataController<Job>
 {
-    protected override Job[] Datas => CleaningDatas.Instance.jobs;
+    protected override List<Job> DataList => CleaningDatas.Instance.JobList;
 }

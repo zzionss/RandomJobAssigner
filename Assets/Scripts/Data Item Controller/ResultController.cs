@@ -9,37 +9,43 @@ using Random = UnityEngine.Random;
 
 public class ResultController : DataController<Result>
 {
-    protected override Result[] Datas => GetResults();
+    protected override List<Result> DataList => GetResults();
 
-    protected override void Awake()
+    private List<Result> GetResults()
     {
-
-    }
-
-    private Result[] GetResults()
-    {
-        Debug.Log(CleaningDatas.Instance.ActivePersons.Length);
+        Debug.Log(CleaningDatas.Instance.ActivePersons.Count);
         Debug.Log(CleaningDatas.Instance.JobCountSum);
 
-        Debug.Assert(CleaningDatas.Instance.ActivePersons.Length == CleaningDatas.Instance.JobCountSum);
-
-        Result[] results = new Result[CleaningDatas.Instance.ActivePersons.Length];
-
-        string[] radomizedJobNames = RandomizeJobNames();
-
-        for(int i = 0; i < results.Length; i++)
+        try
         {
-            Debug.Log(radomizedJobNames[i]);
-            Debug.Log(CleaningDatas.Instance.ActivePersons[i].name);
-
-            results[i] = new Result
+            if(CleaningDatas.Instance.ActivePersons.Count != CleaningDatas.Instance.JobCountSum)
             {
-                name = CleaningDatas.Instance.ActivePersons[i].name,
-                job = radomizedJobNames[i]
-            };
-        }
+                throw new Exception("인원을 맞춰주세요.");
+            }
+            List<Result> resultList = new List<Result>();
 
-        return results;
+            string[] radomizedJobNames = RandomizeJobNames();
+
+            for(int i = 0; i < CleaningDatas.Instance.JobCountSum; i++)
+            {
+                Debug.Log(radomizedJobNames[i]);
+                Debug.Log(CleaningDatas.Instance.ActivePersons[i].name);
+
+                resultList.Add(new Result
+                {
+                    name = CleaningDatas.Instance.ActivePersons[i].name,
+                    job = radomizedJobNames[i]
+                });
+            }
+
+            return resultList;
+        }
+        catch(Exception e)
+        {
+            Debug.LogWarning(e.Message);
+            PopUp.ShowPopUp(e.Message);
+            return null;
+        }
     }
 
     private string[] RandomizeJobNames()
@@ -47,7 +53,7 @@ public class ResultController : DataController<Result>
         string[] jobNames = new string[CleaningDatas.Instance.JobCountSum];
 
         int currentPosition = 0;
-        foreach(Job job in CleaningDatas.Instance.jobs)
+        foreach(Job job in CleaningDatas.Instance.JobList)
         {
             Array.Copy(Enumerable.Repeat(job.name, job.count).ToArray(), 0, jobNames, currentPosition, job.count);
             currentPosition += job.count;
@@ -58,10 +64,16 @@ public class ResultController : DataController<Result>
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return))
+        if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            CreateItems();
-            ClipboardController.Instance.Capture();
+            CreateAllItems();
         }
+    }
+
+    public override void CreateAllItems(List<Result> dataList)
+    {
+        RemoveAllItems();
+        base.CreateAllItems(dataList);
+        ClipboardController.Instance.Capture();
     }
 }

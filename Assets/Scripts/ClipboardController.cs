@@ -1,13 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Drawing;
 using System.IO;
 using System.Diagnostics;
-using Debug = UnityEngine.Debug;
 using System;
-using System.Text;
-using UnityEngine.UI;
 
 public class ClipboardController : Singleton<ClipboardController>
 {
@@ -15,9 +10,10 @@ public class ClipboardController : Singleton<ClipboardController>
     private RenderTexture targetTexture;
     [SerializeField]
     private RectTransform targetRectTransform;
-
-    private string clipboardProcessName = "Clipboards.exe";
-    private string textureDataFileName = "TextureData.txt";
+    [SerializeField]
+    private string clipboardFileName;
+    [SerializeField]
+    private string textureDataFileName;
 
     private Rect GetRectFromRectTransform(RectTransform rectTransform)
     {
@@ -48,7 +44,8 @@ public class ClipboardController : Singleton<ClipboardController>
         string byteString = Convert.ToBase64String(bytes);
 
         File.WriteAllText(Path.Combine(Application.dataPath, textureDataFileName), byteString);
-        Process.Start(Path.Combine(Application.dataPath, clipboardProcessName), Path.Combine(Application.dataPath, textureDataFileName));
+        Process.Start(Path.Combine(Application.dataPath, clipboardFileName), 
+            Path.Combine(Application.dataPath, textureDataFileName));
     }
 
     public void Capture()

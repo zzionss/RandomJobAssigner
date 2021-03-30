@@ -1,66 +1,62 @@
 {
-    "persons": [
+    "personList": [
         {
-            "name": "A",
+            "name": "이름",
+            "isActive": false
+        },
+        {
+            "name": "이름",
+            "isActive": false
+        },
+        {
+            "name": "이름",
             "isActive": true
         },
         {
-            "name": "B",
+            "name": "이름",
             "isActive": true
         },
         {
-            "name": "C",
+            "name": "이름",
             "isActive": true
         },
         {
-            "name": "D",
+            "name": "이름",
             "isActive": true
         },
         {
-            "name": "E",
+            "name": "이름",
             "isActive": true
         },
         {
-            "name": "F",
+            "name": "이름",
             "isActive": true
         },
         {
-            "name": "G",
+            "name": "이름",
             "isActive": true
         },
         {
-            "name": "H",
-            "isActive": true
-        },
-        {
-            "name": "I",
-            "isActive": true
-        },
-        {
-            "name": "J",
+            "name": "이름",
             "isActive": true
         }
     ],
-    "jobs": [
+    "jobList": [
         {
-            "name": "가",
+            "name": "이름",
             "count": 2
         },
         {
-            "name": "나",
+            "name": "이름",
             "count": 2
         },
         {
-            "name": "다",
-            "count": 2
+            "name": "이름",
+            "count": 3
         },
         {
-            "name": "라",
-            "count": 2
-        },
-        {
-            "name": "마",
-            "count": 2
+            "name": "이름",
+            "count": 1
         }
     ]
 }

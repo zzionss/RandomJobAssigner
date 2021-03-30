@@ -14,7 +14,7 @@ public class ResultItem : DataItem<Result>
     
     public override void Initialize()
     {
-        nameText.text = data.name;
-        jobText.text = data.job;
+        nameText.text = Data.name;
+        jobText.text = Data.job;
     }
 }
