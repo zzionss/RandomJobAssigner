@@ -5016,3 +5016,36 @@ System memory in use after: 41.2 MB.
 Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1744.
 Total: 1.801300 ms (FindLiveObjects: 0.161700 ms CreateObjectMapping: 0.035100 ms MarkObjects: 1.577100 ms  DeleteObjects: 0.026100 ms)
 
+========================================================================
+Received Import Request.
+  Time since last request: 507.776675 seconds.
+  path: Assets/DataSetting.json
+  artifactKey: Guid(c3fa0607e10cf9543807dfdb9d01dfaa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DataSetting.json using Guid(c3fa0607e10cf9543807dfdb9d01dfaa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8025549467bb87c7f4324eea6e99bd3c') in 0.020081 seconds
+  Import took 0.022795 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000924 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.19 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.825 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.22 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1084 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 62.8 MB.
+System memory in use after: 62.9 MB.
+
+Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1747.
+Total: 1.907200 ms (FindLiveObjects: 0.203800 ms CreateObjectMapping: 0.036000 ms MarkObjects: 1.652600 ms  DeleteObjects: 0.013400 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

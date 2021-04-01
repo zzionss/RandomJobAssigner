@@ -46,6 +46,8 @@ public class ClipboardController : Singleton<ClipboardController>
         File.WriteAllText(Path.Combine(Application.dataPath, textureDataFileName), byteString);
         Process.Start(Path.Combine(Application.dataPath, clipboardFileName), 
             Path.Combine(Application.dataPath, textureDataFileName));
+
+        // TODO: 클립보드 exe가 없을 때 알림창이 나옵니다.
     }
 
     public void Capture()
