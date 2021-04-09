@@ -32,6 +32,10 @@ public class CleaningDatas
                 JsonUtility.FromJsonOverwrite(File.ReadAllText(SettingFilePath), instance);
                 return instance;
             }
+            else
+            {
+                PopUp.Instance.ShowPopUp("[DataSetting.json] File does not exist!");
+            }
 
             instance = new CleaningDatas();
             File.WriteAllText(SettingFilePath, JsonUtility.ToJson(instance, true));
