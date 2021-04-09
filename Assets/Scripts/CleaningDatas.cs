@@ -9,12 +9,13 @@ public class CleaningDatas
     private const string settingFileName = "DataSetting.json";
     
     private static CleaningDatas instance;
-
+    
     [SerializeField]
     private List<Person> personList;
     [SerializeField]
     private List<Job> jobList;
-
+    private string emptyVariable;
+    
     public static string SettingFilePath => Path.Combine(Application.dataPath, settingFileName);
     public static CleaningDatas Instance
     {
