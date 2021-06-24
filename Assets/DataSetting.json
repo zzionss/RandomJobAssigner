@@ -1,62 +1,70 @@
 {
     "personList": [
         {
-            "name": "이름",
+            "name": "일일",
             "isActive": false
         },
         {
-            "name": "이름",
+            "name": "이이이",
             "isActive": false
         },
         {
-            "name": "이름",
+            "name": "삼",
             "isActive": true
         },
         {
-            "name": "이름",
+            "name": "사",
             "isActive": true
         },
         {
-            "name": "이름",
+            "name": "오",
             "isActive": true
         },
         {
-            "name": "이름",
+            "name": "육",
             "isActive": true
         },
         {
-            "name": "이름",
+            "name": "칠",
             "isActive": true
         },
         {
-            "name": "이름",
+            "name": "팔",
             "isActive": true
         },
         {
-            "name": "이름",
+            "name": "구",
             "isActive": true
         },
         {
-            "name": "이름",
+            "name": "십",
             "isActive": true
         }
     ],
     "jobList": [
         {
-            "name": "이름",
+            "name": "업무일",
             "count": 2
         },
         {
-            "name": "이름",
+            "name": "업무이",
             "count": 2
         },
         {
-            "name": "이름",
+            "name": "업무",
             "count": 3
         },
         {
-            "name": "이름",
+            "name": "업무사",
             "count": 1
+        },
+        {
+            "name": "이름",
+            "count": 0
+        },
+        {
+            "name": "이름",
+            "count": 0
         }
     ]
 }

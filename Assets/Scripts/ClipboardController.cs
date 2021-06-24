@@ -3,39 +3,43 @@ using UnityEngine;
 using System.IO;
 using System.Diagnostics;
 using System;
+using Debug = UnityEngine.Debug;
 
 public class ClipboardController : Singleton<ClipboardController>
 {
     [SerializeField]
-    private RenderTexture targetTexture;
-    [SerializeField]
     private RectTransform targetRectTransform;
     [SerializeField]
-    private string clipboardFileName;
+    private UnityEngine.Object unityDataReceiver;
     [SerializeField]
-    private string textureDataFileName;
+    private UnityEngine.Object textureDataFileName;
 
     private Rect GetRectFromRectTransform(RectTransform rectTransform)
     {
-        targetRectTransform.anchorMin = new Vector2(0, 1);
-        targetRectTransform.anchorMax = new Vector2(0, 1);
-        targetRectTransform.pivot = new Vector2(0, 1);
+        Vector2 pivot = rectTransform.pivot;
 
-        return new Rect(
-            targetRectTransform.anchoredPosition.x,
-            -targetRectTransform.anchoredPosition.y,
-            targetRectTransform.sizeDelta.x,
-            targetRectTransform.sizeDelta.y
-            );
+        rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        rectTransform.ForceUpdateRectTransforms();
+
+        Vector2 position = RectTransformUtility.WorldToScreenPoint(Camera.main, rectTransform.position);
+        Rect rect = rectTransform.rect;
+
+        rect.x = position.x - rect.width / 2;
+        rect.y = position.y - rect.height / 2;
+
+        rectTransform.pivot = pivot;
+        rectTransform.ForceUpdateRectTransforms();
+
+        return rect;
     }
 
-    private Texture2D ConvertToTexture2D(RenderTexture renderTexture, Rect renderRect)
+    private Texture2D ConvertToTexture2D(Rect renderRect)
     {
-        Texture2D tex = new Texture2D((int)renderRect.width, (int)renderRect.height);
-        RenderTexture.active = renderTexture;
-        tex.ReadPixels(renderRect, 0, 0, false);
-        tex.Apply();
-        return tex;
+        Texture2D texture = new Texture2D((int)renderRect.width, (int)renderRect.height);
+        texture.ReadPixels(renderRect, 0, 0, false);
+        texture.Apply();
+
+        return texture;
     }
 
     private void CopyToClipboard(Texture2D screenshot)
@@ -43,9 +47,9 @@ public class ClipboardController : Singleton<ClipboardController>
         byte[] bytes = screenshot.EncodeToJPG();
         string byteString = Convert.ToBase64String(bytes);
 
-        File.WriteAllText(Path.Combine(Application.dataPath, textureDataFileName), byteString);
-        Process.Start(Path.Combine(Application.dataPath, clipboardFileName), 
-            Path.Combine(Application.dataPath, textureDataFileName));
+        File.WriteAllText(Path.Combine(Application.dataPath, textureDataFileName.name + ".txt"), byteString);
+        Process.Start(Path.Combine(Application.dataPath, unityDataReceiver.name + ".exe"),
+            $"\"{Path.Combine(Application.dataPath, textureDataFileName.name + ".txt")}\"");
 
         // TODO: 클립보드 exe가 없을 때 알림창이 나옵니다.
     }
@@ -57,11 +61,8 @@ public class ClipboardController : Singleton<ClipboardController>
 
     private IEnumerator CaptureCoroutine()
     {
-        Camera.main.targetTexture = targetTexture;
         yield return new WaitForEndOfFrame();
 
-        CopyToClipboard(ConvertToTexture2D(targetTexture, GetRectFromRectTransform(targetRectTransform)));
-        yield return new WaitForEndOfFrame();
-        Camera.main.targetTexture = null;
+        CopyToClipboard(ConvertToTexture2D(GetRectFromRectTransform(targetRectTransform)));
     }
 }

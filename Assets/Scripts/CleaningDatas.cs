@@ -14,7 +14,6 @@ public class CleaningDatas
     private List<Person> personList;
     [SerializeField]
     private List<Job> jobList;
-    private string emptyVariable;
     
     public static string SettingFilePath => Path.Combine(Application.dataPath, settingFileName);
     public static CleaningDatas Instance

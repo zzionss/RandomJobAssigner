@@ -13,9 +13,6 @@ public class ResultController : DataController<Result>
 
     private List<Result> GetResults()
     {
-        Debug.Log(CleaningDatas.Instance.ActivePersons.Count);
-        Debug.Log(CleaningDatas.Instance.JobCountSum);
-
         try
         {
             if(CleaningDatas.Instance.ActivePersons.Count != CleaningDatas.Instance.JobCountSum)
@@ -28,9 +25,6 @@ public class ResultController : DataController<Result>
 
             for(int i = 0; i < CleaningDatas.Instance.JobCountSum; i++)
             {
-                Debug.Log(radomizedJobNames[i]);
-                Debug.Log(CleaningDatas.Instance.ActivePersons[i].name);
-
                 resultList.Add(new Result
                 {
                     name = CleaningDatas.Instance.ActivePersons[i].name,
@@ -42,7 +36,6 @@ public class ResultController : DataController<Result>
         }
         catch(Exception e)
         {
-            Debug.LogWarning(e.Message);
             PopUp.ShowPopUp(e.Message);
             return null;
         }
