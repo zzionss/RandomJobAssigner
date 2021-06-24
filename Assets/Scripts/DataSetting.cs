@@ -4,11 +4,11 @@ using System.Linq;
 
 using UnityEngine;
 
-public class CleaningDatas
+public class DataSetting
 {
     private const string settingFileName = "DataSetting.json";
     
-    private static CleaningDatas instance;
+    private static DataSetting instance;
     
     [SerializeField]
     private List<Person> personList;
@@ -16,7 +16,7 @@ public class CleaningDatas
     private List<Job> jobList;
     
     public static string SettingFilePath => Path.Combine(Application.dataPath, settingFileName);
-    public static CleaningDatas Instance
+    public static DataSetting Instance
     {
         get
         {
@@ -27,12 +27,12 @@ public class CleaningDatas
 
             if(File.Exists(SettingFilePath))
             {
-                instance = new CleaningDatas();
+                instance = new DataSetting();
                 JsonUtility.FromJsonOverwrite(File.ReadAllText(SettingFilePath), instance);
                 return instance;
             }
 
-            instance = new CleaningDatas();
+            instance = new DataSetting();
             File.WriteAllText(SettingFilePath, JsonUtility.ToJson(instance, true));
             return instance;
         }
@@ -43,7 +43,7 @@ public class CleaningDatas
     public List<Person> PersonList { get => personList; set => personList = value; }
     public List<Job> JobList { get => jobList; set => jobList = value; }
 
-    public CleaningDatas()
+    public DataSetting()
     {
         personList = new List<Person>();
         jobList = new List<Job>();

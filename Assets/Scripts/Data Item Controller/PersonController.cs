@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PersonController : DataController<Person>
 {
-    protected override List<Person> DataList => CleaningDatas.Instance.PersonList;
+    protected override List<Person> DataList => DataSetting.Instance.PersonList;
 }

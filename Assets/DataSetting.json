@@ -1,70 +1,42 @@
 {
     "personList": [
         {
-            "name": "일일",
+            "name": "홍길동",
             "isActive": false
         },
         {
-            "name": "이이이",
+            "name": "홍길순",
             "isActive": false
         },
         {
-            "name": "삼",
+            "name": "아무개",
             "isActive": true
         },
         {
-            "name": "사",
+            "name": "아무나",
             "isActive": true
         },
         {
-            "name": "오",
-            "isActive": true
-        },
-        {
-            "name": "육",
-            "isActive": true
-        },
-        {
-            "name": "칠",
-            "isActive": true
-        },
-        {
-            "name": "팔",
-            "isActive": true
-        },
-        {
-            "name": "구",
-            "isActive": true
-        },
-        {
-            "name": "십",
+            "name": "김무명",
             "isActive": true
         }
     ],
     "jobList": [
         {
-            "name": "업무일",
+            "name": "시민",
             "count": 2
         },
         {
-            "name": "업무이",
+            "name": "의사",
             "count": 2
         },
         {
-            "name": "업무",
+            "name": "경찰",
             "count": 3
         },
         {
-            "name": "업무사",
+            "name": "마피아",
             "count": 1
-        },
-        {
-            "name": "이름",
-            "count": 0
-        },
-        {
-            "name": "이름",
-            "count": 0
         }
     ]
 }

@@ -15,7 +15,7 @@ public class ResultController : DataController<Result>
     {
         try
         {
-            if(CleaningDatas.Instance.ActivePersons.Count != CleaningDatas.Instance.JobCountSum)
+            if(DataSetting.Instance.ActivePersons.Count != DataSetting.Instance.JobCountSum)
             {
                 throw new Exception("인원을 맞춰주세요.");
             }
@@ -23,11 +23,11 @@ public class ResultController : DataController<Result>
 
             string[] radomizedJobNames = RandomizeJobNames();
 
-            for(int i = 0; i < CleaningDatas.Instance.JobCountSum; i++)
+            for(int i = 0; i < DataSetting.Instance.JobCountSum; i++)
             {
                 resultList.Add(new Result
                 {
-                    name = CleaningDatas.Instance.ActivePersons[i].name,
+                    name = DataSetting.Instance.ActivePersons[i].name,
                     job = radomizedJobNames[i]
                 });
             }
@@ -43,10 +43,10 @@ public class ResultController : DataController<Result>
 
     private string[] RandomizeJobNames()
     {
-        string[] jobNames = new string[CleaningDatas.Instance.JobCountSum];
+        string[] jobNames = new string[DataSetting.Instance.JobCountSum];
 
         int currentPosition = 0;
-        foreach(Job job in CleaningDatas.Instance.JobList)
+        foreach(Job job in DataSetting.Instance.JobList)
         {
             Array.Copy(Enumerable.Repeat(job.name, job.count).ToArray(), 0, jobNames, currentPosition, job.count);
             currentPosition += job.count;

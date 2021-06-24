@@ -27,7 +27,7 @@ public class JobItem : DataItem<Job>
     {
         Data.count++;
         countField.text = Data.count.ToString();
-        CleaningDatas.Instance.Save();
+        DataSetting.Instance.Save();
     }
 
     public void Decrease()
@@ -36,19 +36,19 @@ public class JobItem : DataItem<Job>
         {
             Data.count--;
             countField.text = Data.count.ToString();
-            CleaningDatas.Instance.Save();
+            DataSetting.Instance.Save();
         }
     }
 
     public void ChangeCount(string count)
     {
         Data.count = int.Parse(count);
-        CleaningDatas.Instance.Save();
+        DataSetting.Instance.Save();
     }
 
     public void ChangeName(string name)
     {
         Data.name = name;
-        CleaningDatas.Instance.Save();
+        DataSetting.Instance.Save();
     }
 }

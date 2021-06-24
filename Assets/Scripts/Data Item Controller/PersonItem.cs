@@ -23,12 +23,12 @@ public class PersonItem : DataItem<Person>
     public void ChangeActiveState(bool isActive)
     {
         Data.isActive = isActive;
-        CleaningDatas.Instance.Save();
+        DataSetting.Instance.Save();
     }
 
     public void ChangeName(string name)
     {
         Data.name = name;
-        CleaningDatas.Instance.Save();
+        DataSetting.Instance.Save();
     }
 }

@@ -38,7 +38,7 @@ public abstract class DataController<T> : MonoBehaviour where T : Data, new()
         CreateItem(data);
 
         DataList.Add(data);
-        CleaningDatas.Instance.Save();
+        DataSetting.Instance.Save();
     }
 
     public void RemoveAllItems()
@@ -63,7 +63,7 @@ public abstract class DataController<T> : MonoBehaviour where T : Data, new()
         Destroy(targetItem);
 
         DataList.Remove(data);
-        CleaningDatas.Instance.Save();
+        DataSetting.Instance.Save();
     }
 
     private void CreateItem(T data)
