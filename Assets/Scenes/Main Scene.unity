@@ -1328,7 +1328,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetRectTransform: {fileID: 1605878912}
   unityDataReceiver: {fileID: 102900000, guid: b662e8df9a820c341b05117416ba4d52, type: 3}
-  textureDataFileName: {fileID: 4900000, guid: d1d4c453244e76f41b48739ac649c5bd, type: 3}
 --- !u!4 &1059771510
 Transform:
   m_ObjectHideFlags: 0

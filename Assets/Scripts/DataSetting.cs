@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,16 +7,25 @@ using UnityEngine;
 
 public class DataSetting
 {
-    private const string settingFileName = "DataSetting.json";
-    
+#if UNITY_EDITOR
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void OnDomainReload()
+    {
+        instance = null;
+    }
+#endif
+
     private static DataSetting instance;
     
     [SerializeField]
     private List<Person> personList;
     [SerializeField]
     private List<Job> jobList;
-    
-    public static string SettingFilePath => Path.Combine(Application.dataPath, settingFileName);
+
+    public readonly static string fileName = "data.json";
+    public readonly static string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\RandomJobAssigner\Data\";
+    public readonly static string fullPath = Path.Combine(filePath, fileName);
+
     public static DataSetting Instance
     {
         get
@@ -25,15 +35,20 @@ public class DataSetting
                 return instance;
             }
 
-            if(File.Exists(SettingFilePath))
+            if(File.Exists(fullPath))
             {
                 instance = new DataSetting();
-                JsonUtility.FromJsonOverwrite(File.ReadAllText(SettingFilePath), instance);
+                JsonUtility.FromJsonOverwrite(File.ReadAllText(fullPath), instance);
                 return instance;
             }
 
+            if(!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+
             instance = new DataSetting();
-            File.WriteAllText(SettingFilePath, JsonUtility.ToJson(instance, true));
+            File.WriteAllText(fullPath, JsonUtility.ToJson(instance, true));
             return instance;
         }
     }
@@ -51,6 +66,6 @@ public class DataSetting
 
     public void Save()
     {
-        File.WriteAllText(SettingFilePath, JsonUtility.ToJson(instance, true));
+        File.WriteAllText(fullPath, JsonUtility.ToJson(instance, true));
     }
 }

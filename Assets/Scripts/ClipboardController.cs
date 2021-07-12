@@ -11,8 +11,36 @@ public class ClipboardController : Singleton<ClipboardController>
     private RectTransform targetRectTransform;
     [SerializeField]
     private UnityEngine.Object unityDataReceiver;
-    [SerializeField]
-    private UnityEngine.Object textureDataFileName;
+
+    private readonly string unityDataReceiverName = "UnityDataReceiver.exe";
+    private readonly string textureDataFileName = "TextureData.txt";
+    private string TextureDataPath
+    {
+        get
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\RandomJobAssigner\Texture\";
+            if(!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            return Path.Combine(path, textureDataFileName);
+        }
+    }
+
+    private string DataReceiverPath
+    {
+
+        get
+        {
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\RandomJobAssigner\Texture\", unityDataReceiverName);
+            if(!File.Exists(path))
+            {
+                File.Copy(Path.Combine(Application.streamingAssetsPath, unityDataReceiverName), path);
+            }
+
+            return path;
+        }
+    }
 
     private Rect GetRectFromRectTransform(RectTransform rectTransform)
     {
@@ -47,11 +75,9 @@ public class ClipboardController : Singleton<ClipboardController>
         byte[] bytes = screenshot.EncodeToJPG();
         string byteString = Convert.ToBase64String(bytes);
 
-        File.WriteAllText(Path.Combine(Application.dataPath, textureDataFileName.name + ".txt"), byteString);
-        Process.Start(Path.Combine(Application.dataPath, unityDataReceiver.name + ".exe"),
-            $"\"{Path.Combine(Application.dataPath, textureDataFileName.name + ".txt")}\"");
-
-        // TODO: 클립보드 exe가 없을 때 알림창이 나옵니다.
+        File.WriteAllText(TextureDataPath, byteString);
+        Process.Start(DataReceiverPath,
+            $"\"{TextureDataPath}\"");
     }
 
     public void Capture()
